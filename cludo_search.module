@@ -5,7 +5,6 @@
  * Cludo search module enables searching via a dedicated cludo Search search.
  * See README.txt and the help page at admin/help/cludo_search.
  */
-
 // Helpers.
 require_once drupal_get_path('module', 'cludo_search') . '/cludo_search.helpers.inc';
 
@@ -13,8 +12,19 @@ require_once drupal_get_path('module', 'cludo_search') . '/cludo_search.helpers.
 require_once drupal_get_path('module', 'cludo_search') . '/theme/cludo_search.theme.inc';
 
 /**
- * Implements hook_help().
+ * Implements hook_features_api().
  */
+function cludo_search_features_api() {
+  return array(
+    'cludo_search_profile' => array(
+      'name' => t('Config for Cludo search'),
+      'file' => drupal_get_path('module', 'cludo_search').'/cludo_search.features.inc',
+      'default_file' => FEATURES_DEFAULTS_INCLUDED,
+      'default_hook' => 'cludo_search_defaults',
+      'feature_source' => TRUE,      
+    ),
+  );
+}
 
 /**
  * Implements hook_help().
@@ -271,7 +281,6 @@ function cludo_search_search_form_submit($form, &$form_state) {
 
   $form_state['redirect'] = url($form_state['action'] . $search_query, array('absolute' => TRUE));
   $data = "submit info: " . $search_query . " \n redirect: " . $form_state['redirect'] . "\n";
-
 }
 
 /**
@@ -369,7 +378,7 @@ function cludo_search_preprocess_page(&$variables) {
 
   drupal_add_html_head($markup_array, 'cludo_search');
 
-  // "insert at bottom of footer".
+  // Insert at bottom of footer.
   $footer_search_js = "
   var CludoSearch;
   (function () {
@@ -399,6 +408,7 @@ function cludo_search_preprocess_page(&$variables) {
   drupal_add_js($footer_search_js, array(
     'type' => 'inline',
     'scope' => 'footer',
+    'every_page' => TRUE,
     'weight' => 5,
   ));
 }
