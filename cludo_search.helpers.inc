@@ -22,15 +22,14 @@ define('CS_DEFAULT_ENGINEID', 'default_engineId');
  */
 function _cludo_search_get_settings($refresh = FALSE) {
 
-  static $settings;
+  $settings = &drupal_static(__FUNCTION__, NULL, $refresh);
 
-  $field_keys = array(
-    'searchUrl',
-    'customerId',
-    'engineId',
-  );
-
-  if ($refresh || empty($settings)) {
+  if (!isset($settings)) {
+    $field_keys = array(
+      'searchUrl',
+      'customerId',
+      'engineId',
+    );
 
     // Settings fall back to default constants.
     foreach ($field_keys as $field) {
