@@ -11,11 +11,7 @@
  */
 function cludo_search_uninstall() {
 
-  $field_keys =  array(
-    'searchUrl',
-    'customerId',
-    'customerId',
-  );
+  $field_keys = _cludo_search_get_field_keys();
 
   foreach ($field_keys as $field) {
     variable_del('cludo_search_' . $field);

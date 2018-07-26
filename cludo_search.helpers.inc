@@ -12,6 +12,7 @@
 define('CS_DEFAULT_SEARCHURL', '');
 define('CS_DEFAULT_CUSTOMERID', 'default_customerId');
 define('CS_DEFAULT_ENGINEID', 'default_engineId');
+define('CS_DEFAULT_SEARCH_PAGE', 'csearch');
 
 /**
  * Minimize redundant trips to the db when looking for module settings.
@@ -25,11 +26,7 @@ function _cludo_search_get_settings($refresh = FALSE) {
   $settings = &drupal_static(__FUNCTION__, NULL, $refresh);
 
   if (!isset($settings)) {
-    $field_keys = array(
-      'searchUrl',
-      'customerId',
-      'engineId',
-    );
+    $field_keys = _cludo_search_get_field_keys();
 
     // Settings fall back to default constants.
     foreach ($field_keys as $field) {

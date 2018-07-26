@@ -25,10 +25,13 @@ function cludo_search_admin_settings($form) {
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
   );
+  
+  global $base_url;
+  
   $form['connection_info']['searchUrl'] = array(
     '#type' => 'textfield',
     '#title' => t('Your Cludo Search page'),
-    '#description' => t('Valid URL or IP address of your search page, including <em>http://</em> or <em>https://. Example: <em>http://www.example.com/csearch</em>'),
+    '#description' => t(' Valid URL or IP address of your search page, including <em>http://</em> or <em>https://. Example: <em>:base_url/:search_path</em>',array(':base_url'=>$base_url, ':search_path'=>$settings['search_page'])),
     '#default_value' => $settings['searchUrl'],
     '#required' => TRUE,
   );
@@ -44,6 +47,14 @@ function cludo_search_admin_settings($form) {
     '#title' => t('Engine ID'),
     '#description' => t('Cludo Search engineId value.'),
     '#default_value' => $settings['engineId'],
+    '#required' => TRUE,
+  );
+
+  $form['connection_info']['search_page'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Search page path'),
+    '#description' => t('Cludo search page.'),
+    '#default_value' => $settings['search_page'],
     '#required' => TRUE,
   );
 
@@ -71,11 +82,7 @@ function cludo_search_admin_settings_validate($form, &$form_state) {
  */
 function cludo_search_admin_settings_submit($form, &$form_state) {
 
-  $field_keys = array(
-    'searchUrl',
-    'customerId',
-    'engineId',
-  );
+  $field_keys = _cludo_search_get_field_keys();
 
   // Save settings.
   foreach ($field_keys as $field) {
