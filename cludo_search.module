@@ -266,6 +266,7 @@ function cludo_search_search_form_submit($form, &$form_state) {
   $search_query = urlencode($form_state['values']['search_keys']);
 
   // Dirty change to get rid of +.
+  dpm($search_query);
   $search_query = str_replace('+', '%20', $search_query);
 
   $form_state['redirect'] = url($form_state['action'] . $search_query, array('absolute' => TRUE));

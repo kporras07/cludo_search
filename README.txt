@@ -46,7 +46,12 @@ The module provides one block, and a results page:
 
 The search page:
 
-  * csearch/
+  * this can be configured in on the settings page.
+
+Know issues:
+
+On the search template unset warnings are being thrown, to resolve these this 
+patch can be applied against core https://www.drupal.org/project/drupal/issues/2884171
 
 No records of you search content are stored on your server.
 

@@ -1,14 +1,14 @@
 <?php
-// $Id$
+
 /**
- * @file 
- *    default theme implementation for the full search form
+ * @file
+ * Default theme implementation for the full search form.
  *
- * variables of interest
+ * Variables of interest
  * - variables['form'] : the form elements array, pre-render
- * - variables['search_form']['hidden'] : hidden form elements collapsed + rendered 
+ * - variables['search_form']['hidden'] : hidden form elements collapsed + rendered
  * - variables['search_form'] : non-hidden form elements rendered and keyed by original form keys
- * - variables['search_form_complete'] : the entire form collapsed and rendered
+ * - variables['search_form_complete'] : the entire form collapsed and rendered.
  *
  * @see template_preprocess_cludo_search_search_form()
  */

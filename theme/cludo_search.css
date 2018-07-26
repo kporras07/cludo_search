@@ -1,5 +1,3 @@
-/* $Id: $ */
-
 /* full search form */
 .cludo-search-search-form {
   margin-bottom: 1em;
@@ -10,7 +8,7 @@
 }
 .cludo-search-results,
 .cludo-search-keymatch-results {
-  list-style: none;  
+  list-style: none;
 }
 
 /* result entries */
@@ -28,7 +26,7 @@
   margin-bottom: 1em;
 }
 .cludo-search-results .cludo-search-snippet-info {
-  padding-left:0; 
+  padding-left: 0;
 }
 .cludo-search-results .cludo-search-info,
 .cludo-search-keymatch-results {
@@ -38,22 +36,22 @@
 
 /* key match results */
 .cludo-search-keymatch-results {
-  padding-left:0;
+  padding-left: 0;
 }
 .cludo-search-keymatch-results li {
-  background:#f1f1ed;
-  border-bottom:1px solid #e7e7e3;
-  padding:10px 10px;
+  background: #f1f1ed;
+  border-bottom: 1px solid #e7e7e3;
+  padding: 10px 10px;
   border-radius: 6px;
-  -webkit-border-radius:6px;
-  -moz-border-radius:6px;
-  margin-bottom:10px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  margin-bottom: 10px;
 }
 .cludo-search-keymatch-results h3 {
   margin: 0;
 }
 .cludo-search-keymatch-results p {
-  margin:0;
+  margin: 0;
 }
 
 /* synonyms */
@@ -67,7 +65,8 @@ form.search-cludo-search-search-form {
   margin-top: 1em;
 }
 
-.cludo-search-synonyms ul, .cludo-search-synonyms li {
+.cludo-search-synonyms ul,
+.cludo-search-synonyms li {
   display: inline;
   list-style-type: none;
 }
@@ -75,7 +74,7 @@ form.search-cludo-search-search-form {
 /* results listings "control" bar */
 .cludo-search-results-control-bar {
   border: 1px solid #ddd;
-  background-color: #F6F6F2;
+  background-color: #f6f6f2;
   border-color: #eee;
   border-radius: 6px;
   -webkit-border-radius: 6px;
