@@ -5,6 +5,7 @@
  * Cludo search module enables searching via a dedicated cludo Search search.
  * See README.txt and the help page at admin/help/cludo_search.
  */
+
 // Helpers.
 require_once drupal_get_path('module', 'cludo_search') . '/cludo_search.helpers.inc';
 
@@ -99,7 +100,7 @@ function cludo_search_block_info() {
   );
 
   $settings = _cludo_search_get_settings();
-  
+
   // Related searches block.
   $blocks['ca_result_searches'] = array(
     'info' => t('Search Results'),
@@ -107,7 +108,7 @@ function cludo_search_block_info() {
     // Set default visibility to appear only on results pages (just a
     // suggestion).
     'visibility' => 1,
-    'pages' => $settings['search_page'].'*',
+    'pages' => $settings['search_page'] . '*',
   );
 
   return $blocks;
@@ -177,8 +178,8 @@ function cludo_search_block_form($form, &$form_state) {
 }
 
 /**
- * Submit handler for block search form just sets the redirect for the form
- * based on the search query.
+ * Submit handler for block search form.
+ * Just sets the redirect for the form based on the search query.
  */
 function cludo_search_block_form_submit($form, &$form_state) {
 
@@ -195,8 +196,8 @@ function cludo_search_block_form_submit($form, &$form_state) {
   $search_query = str_replace('+', '%20', $search_query);
 
   $settings = _cludo_search_get_settings();
-  
-  $form_state['redirect'] = array($settings['search_page'].'/' . $query, array('fragment' => '?cludoquery=' . $search_query));
+
+  $form_state['redirect'] = array($settings['search_page'] . '/' . $query, array('fragment' => '?cludoquery=' . $search_query));
 
   // Search execution happens in page callback.
   $form['#action'] = '';
@@ -266,7 +267,6 @@ function cludo_search_search_form_submit($form, &$form_state) {
   $search_query = urlencode($form_state['values']['search_keys']);
 
   // Dirty change to get rid of +.
-  dpm($search_query);
   $search_query = str_replace('+', '%20', $search_query);
 
   $form_state['redirect'] = url($form_state['action'] . $search_query, array('absolute' => TRUE));
@@ -349,6 +349,7 @@ function cludo_search_search_view($query = '', $sort = NULL) {
 
 /**
  * Adding javascript to header and footer.
+ *
  * @see https://cludo.zendesk.com/hc/en-us/articles/115003954911-How-to-use-and-customize-in-line-templates
  * (In the long run, this should be rendered via processed flat file)
  */
@@ -404,7 +405,7 @@ function cludo_search_preprocess_page(&$variables) {
 
 /**
  * Returns field keys.
- * 
+ *
  * @return array
  */
 function _cludo_search_get_field_keys() {
@@ -412,6 +413,6 @@ function _cludo_search_get_field_keys() {
     'searchUrl',
     'customerId',
     'engineId',
-    'search_page'
+    'search_page',
   );
 }
