@@ -1,7 +1,8 @@
 <?php
+
 /**
  * @file
- *    theme registry and preprocess functions for the default templates
+ * Theme registry and preprocess functions for the default templates.
  */
 
 /**
@@ -29,12 +30,15 @@ function cludo_search_theme() {
 
   // Results page (top level template for the rest).
   $registry['cludo_search_results'] = array(
-    'variables' => array('search_query_data' => NULL, 'response_data' => NULL, 'synonyms_label' => t('You might also try:')),
+    'variables' => array(
+      'search_query_data' => NULL,
+      'response_data' => NULL,
+      'synonyms_label' => t('You might also try:'),
+    ),
     'template' => 'cludo-search-results',
     'path' => $ca_template_dir,
   );
 
-  
   // Single result within the results page.
   $registry['cludo_search_result'] = array(
     'variables' => array('result_data' => NULL),
@@ -45,9 +49,8 @@ function cludo_search_theme() {
   return $registry;
 }
 
-
 /**
- * Preprocess block search form
+ * Preprocess block search form.
  */
 function template_preprocess_cludo_search_block_form(&$vars) {
 
@@ -57,9 +60,10 @@ function template_preprocess_cludo_search_block_form(&$vars) {
   // Vars named after form keys so themers can print each element independently.
   foreach (element_children($vars['form']) as $key) {
 
-    // token = FALSE on search form means '#type' wont be there
+    // Token = FALSE on search form means '#type' wont be there
     // put the option check here while we wait and see if the tooken-to-false
-    // solution for Varnish caching issue actually solves the problem in the wild
+    // solution for Varnish caching issue actually solves the problem in the
+    // wild.
     $type = array_key_exists('#type', $vars['form'][$key]) ? $vars['form'][$key]['#type'] : '';
     if ($type == 'hidden' || $type == 'token') {
       $hidden[] = drupal_render($vars['form'][$key]);
@@ -72,7 +76,8 @@ function template_preprocess_cludo_search_block_form(&$vars) {
   // No theming value on hidden elements, so collapse them.
   $vars['block_search_form']['hidden'] = implode($hidden);
 
-  // Collect the whole shebang so the complete form can be rendered with one var.
+  // Collect the whole shebang so the complete form can be rendered with one
+  // var.
   $vars['block_search_form_complete'] = implode($vars['block_search_form']);
 
   // Render template.
@@ -89,9 +94,10 @@ function template_preprocess_cludo_search_search_form(&$vars) {
   // Vars named after form keys so themers can print each element independently.
   foreach (element_children($vars['form']) as $key) {
 
-    // token = FALSE on search form means '#type' wont be there
+    // Token = FALSE on search form means '#type' wont be there
     // put the option check here while we wait and see if the tooken-to-false
-    // solution for Varnish caching issue actually solves the problem in the wild
+    // solution for Varnish caching issue actually solves the problem in the
+    // wild.
     $type = array_key_exists('#type', $vars['form'][$key]) ? $vars['form'][$key]['#type'] : '';
     if ($type == 'hidden' || $type == 'token') {
       $hidden[] = drupal_render($vars['form'][$key]);
@@ -104,7 +110,8 @@ function template_preprocess_cludo_search_search_form(&$vars) {
   // No theming value on hidden elements, so collapse them.
   $vars['search_form']['hidden'] = implode($hidden);
 
-  // Collect the whole shebang so the complete form can be rendered with one var.
+  // Collect the whole shebang so the complete form can be rendered with one
+  // var.
   $vars['search_form_complete'] = implode($vars['search_form']);
 
   // Render template.
@@ -115,17 +122,16 @@ function template_preprocess_cludo_search_search_form(&$vars) {
  */
 function template_preprocess_cludo_search_result(&$vars) {
 
-
-  // if the result has a mime type value, generate file icon image
+  // If the result has a mime type value, generate file icon image
   // that themes can optionally display
-  // below includes patch: cludo_search-file_icon_alt-2598486-1.patch
-  if ( $vars['mime']['type'] != '' ) {
-    $file = new stdClass;
+  // below includes patch: cludo_search-file_icon_alt-2598486-1.patch.
+  if ($vars['mime']['type'] != '') {
+    $file = new stdClass();
     $file->filemime = $vars['mime']['type'];
     $vars['mime']['icon'] = theme('file_icon', array(
       'file' => $file,
       'icon_directory' => variable_get('file_icon_directory', drupal_get_path('module', 'file') . '/icons'),
-      'alt' => $vars['mime']['type']
+      'alt' => $vars['mime']['type'],
     ));
   }
 
@@ -137,9 +143,8 @@ function template_preprocess_cludo_search_result(&$vars) {
   // Sanitize crawl date.
   $vars['crawl_date'] = check_plain($vars['crawl_date']);
 
-  // Add a cludo-search-levelx class if we're sub-levels
+  // Add a cludo-search-levelx class if we're sub-levels.
   if ((int) $vars['level'] > 1) {
     $vars['classes_array'][] = 'cludo-search-level' . $vars['level'];
   }
 }
-
