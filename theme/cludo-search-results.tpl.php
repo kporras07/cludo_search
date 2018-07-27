@@ -13,7 +13,7 @@
 ?>
 <?php print drupal_render($search_form); ?>
 <?php print drupal_render($form); ?>
-<?php  print drupal_render($cludo_search_search_form); ?>
+<?php print drupal_render($cludo_search_search_form); ?>
 <div class="container-inline">
   <?php print $search_form_complete; ?>
 </div>
