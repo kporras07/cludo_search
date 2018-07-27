@@ -31,7 +31,7 @@ function cludo_search_admin_settings($form) {
   $form['connection_info']['searchUrl'] = array(
     '#type' => 'textfield',
     '#title' => t('Your Cludo Search page'),
-    '#description' => t(' Valid URL or IP address of your search page, including <em>http://</em> or <em>https://. Example: <em>:base_url/:search_path</em>', array(':base_url' => $base_url, ':search_path' => $settings['search_page'])),
+    '#description' => t('Valid URL or IP address of your search page, including <em>http://</em> or <em>https://. Example: <em>:base_url/:search_path</em>', array(':base_url' => $base_url, ':search_path' => $settings['search_page'])),
     '#default_value' => $settings['searchUrl'],
     '#required' => TRUE,
   );
