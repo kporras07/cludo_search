@@ -135,7 +135,7 @@ function template_preprocess_cludo_search_result(&$vars) {
     ));
   }
 
-  // Sanatize snippet and title ...
+  // Sanitise snippet and title.
   // Allow boldface through for keywork highlighting.
   $vars['snippet'] = filter_xss($vars['snippet'], array('b', 'strong'));
   $vars['title'] = filter_xss($vars['title'], array('b', 'strong'));
