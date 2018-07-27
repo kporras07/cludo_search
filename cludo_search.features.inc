@@ -14,6 +14,10 @@ function cludo_search_profile_features_export_options() {
   $options['cludo_search_engineId'] = 'Suppiled engine ID from cludo search';
   $options['cludo_search_searchUrl'] = 'Search url for site.';
   $options['cludo_search_search_page'] = 'The site configured search page path';
+  $options['cludo_search_hide_did_you_mean'] = 'Hides how did you mean';
+  $options['cludo_search_hide_results_count'] = 'Hides results count';
+  $options['cludo_search_hide_search_filters'] = 'Hides search filters';
+  $options['cludo_search_disable_autocomplete'] = 'Stops autocomplete';
   return $options;
 }
 
