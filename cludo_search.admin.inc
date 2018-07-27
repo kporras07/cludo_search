@@ -104,7 +104,7 @@ function cludo_search_admin_settings_validate($form, &$form_state) {
 
   // SearchUrl should be a valid-format URL or IPv4 address including
   // 'http(s)://'
-  if (filter_var($form_state['values']['searchUrl'], FILTER_VALIDATE_URL) === FALSE) {
+  if (!valid_url($form_state['values']['searchUrl'])) {
     form_set_error(
         'searchUrl', t('Cludo Search URL name must be a valid-format URL or IPv4 address, including <em>http(s)://</em>. Example: http://www.example.com/search.')
     );
