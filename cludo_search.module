@@ -18,10 +18,10 @@ function cludo_search_features_api() {
   return array(
     'cludo_search_profile' => array(
       'name' => t('Config for Cludo search'),
-      'file' => drupal_get_path('module', 'cludo_search').'/cludo_search.features.inc',
+      'file' => drupal_get_path('module', 'cludo_search') . '/cludo_search.features.inc',
       'default_file' => FEATURES_DEFAULTS_INCLUDED,
       'default_hook' => 'cludo_search_defaults',
-      'feature_source' => TRUE,      
+      'feature_source' => TRUE,
     ),
   );
 }
@@ -377,6 +377,10 @@ function cludo_search_preprocess_page(&$variables) {
   );
 
   drupal_add_html_head($markup_array, 'cludo_search');
+  $disable_autocomplete = $settings['disable_autocomplete'] ? 'true' : 'false';
+  $hide_results = $settings['hide_results_count'] ? 'true' : 'false';
+  $hide_did_you_mean = $settings['hide_did_you_mean'] ? 'true' : 'false';
+  $hide_search_filters = $settings['hide_search_filters'] ? 'true' : 'false';
 
   // Insert at bottom of footer.
   $footer_search_js = "
@@ -386,6 +390,10 @@ function cludo_search_preprocess_page(&$variables) {
           customerId: " . $settings['customerId'] . ",
           engineId: " . $settings['engineId'] . ",
           searchUrl: '" . $settings['searchUrl'] . "',
+          disableAutocomplete: " . $disable_autocomplete . ",
+          hideResultsCount: " . $hide_results . ",
+          hideSearchDidYouMean: " . $hide_did_you_mean . ",
+          hideSearchFilters: " . $hide_search_filters . ",
           language: 'en',
           searchInputs: [\"cludo-search-block-form \",\"cludo-search-search-form\"],
           type: 'inline',		
@@ -424,5 +432,9 @@ function _cludo_search_get_field_keys() {
     'customerId',
     'engineId',
     'search_page',
+    'disable_autocomplete',
+    'hide_results_count',
+    'hide_did_you_mean',
+    'hide_search_filters',
   );
 }
