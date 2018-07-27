@@ -23,7 +23,6 @@
  * @see template_preprocess_cludo_search_result()
  * @see cludo-search-results.tpl.php
  */
-
 ?>
 <?php print drupal_render($search_form); ?>
 <?php  print drupal_render($cludo_search_search_form); ?>

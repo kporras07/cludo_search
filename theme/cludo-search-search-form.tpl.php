@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Default theme implementation for the full search form.
