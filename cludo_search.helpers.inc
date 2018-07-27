@@ -2,12 +2,13 @@
 
 /**
  * @file
- *    helper functions for the Cludo Searchmodule
+ * Helper functions for the Cludo Search module.
  *
  * @see cludo_search_appliance.module
  */
+
 /**
- * default module settings
+ * Default module settings.
  */
 define('CS_DEFAULT_SEARCHURL', '');
 define('CS_DEFAULT_CUSTOMERID', 'default_customerId');
@@ -20,10 +21,10 @@ define('CS_DEFAULT_HIDE_SEARCH_FILTERS', FALSE);
 
 /**
  * Minimize redundant trips to the db when looking for module settings.
+ *
  * Hooks that change module settings should run this function with
  * $refresh = TRUE so other hooks can just get settings without a db
  * query.
- *
  */
 function _cludo_search_get_settings($refresh = FALSE) {
 
