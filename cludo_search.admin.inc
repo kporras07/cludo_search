@@ -25,13 +25,13 @@ function cludo_search_admin_settings($form) {
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
   );
-  
+
   global $base_url;
-  
+
   $form['connection_info']['searchUrl'] = array(
     '#type' => 'textfield',
     '#title' => t('Your Cludo Search page'),
-    '#description' => t(' Valid URL or IP address of your search page, including <em>http://</em> or <em>https://. Example: <em>:base_url/:search_path</em>',array(':base_url'=>$base_url, ':search_path'=>$settings['search_page'])),
+    '#description' => t(' Valid URL or IP address of your search page, including <em>http://</em> or <em>https://. Example: <em>:base_url/:search_path</em>', array(':base_url' => $base_url, ':search_path' => $settings['search_page'])),
     '#default_value' => $settings['searchUrl'],
     '#required' => TRUE,
   );
@@ -56,6 +56,40 @@ function cludo_search_admin_settings($form) {
     '#description' => t('Cludo search page.'),
     '#default_value' => $settings['search_page'],
     '#required' => TRUE,
+  );
+
+  $form['additional_customisations'] = array(
+    '#title' => t('Additional Customisations'),
+    '#type' => 'fieldset',
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  );
+
+  $form['additional_customisations']['disable_autocomplete'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Disable Autocomplete'),
+    '#description' => t('This will disable autocomplete on the search form'),
+    '#default_value' => $settings['disable_autocomplete'],
+  );
+  $form['additional_customisations']['hide_results_count'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Hide Results Count'),
+    '#description' => t('This will hide the number of results from displaying.'),
+    '#default_value' => $settings['hide_results_count'],
+  );
+
+  $form['additional_customisations']['hide_did_you_mean'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Hide the "Did you mean..." suggestions'),
+    '#description' => t('This will stop the suggestions from showing'),
+    '#default_value' => $settings['hide_did_you_mean'],
+  );
+
+  $form['additional_customisations']['hide_search_filters'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Hide search filters (Overlay Implementation only)'),
+    '#description' => t('Hides the search filters.'),
+    '#default_value' => $settings['hide_search_filters'],
   );
 
   $form['#submit'][] = 'cludo_search_admin_settings_submit';

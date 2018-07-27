@@ -13,6 +13,10 @@ define('CS_DEFAULT_SEARCHURL', '');
 define('CS_DEFAULT_CUSTOMERID', 'default_customerId');
 define('CS_DEFAULT_ENGINEID', 'default_engineId');
 define('CS_DEFAULT_SEARCH_PAGE', 'csearch');
+define('CS_DEFAULT_DISABLE_AUTOCOMPLETE', FALSE);
+define('CS_DEFAULT_HIDE_RESULTS_COUNT', FALSE);
+define('CS_DEFAULT_HIDE_DID_YOU_MEAN', FALSE);
+define('CS_DEFAULT_HIDE_SEARCH_FILTERS', FALSE);
 
 /**
  * Minimize redundant trips to the db when looking for module settings.
