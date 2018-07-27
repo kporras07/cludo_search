@@ -3,8 +3,10 @@
 /**
  * @file
  * Cludo search module enables searching via a dedicated cludo Search search.
+ *
  * See README.txt and the help page at admin/help/cludo_search.
  */
+
 // Helpers.
 require_once drupal_get_path('module', 'cludo_search') . '/cludo_search.helpers.inc';
 
@@ -189,6 +191,7 @@ function cludo_search_block_form($form, &$form_state) {
 
 /**
  * Submit handler for block search form.
+ *
  * Just sets the redirect for the form based on the search query.
  */
 function cludo_search_block_form_submit($form, &$form_state) {
@@ -285,6 +288,7 @@ function cludo_search_search_form_submit($form, &$form_state) {
 
 /**
  * Top level search execution (menu callback).
+ *
  * - performs a query of the csa device for a SINGLE PAGE of search results.
  *
  * @arg $query
@@ -425,6 +429,7 @@ function cludo_search_preprocess_page(&$variables) {
  * Returns field keys.
  *
  * @return array
+ *   An array of all the variables.
  */
 function _cludo_search_get_field_keys() {
   return array(
