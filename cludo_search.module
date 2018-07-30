@@ -317,7 +317,7 @@ function cludo_search_search_view($query = '', $sort = NULL) {
     // Response processing structures
     // cURL arguments for the query.
     $search_query_data = array();
-    // Processd response.
+    // Processed response.
     $response_data = array();
     // Get the sort parameter from the url.
     $sort_param = '';
