@@ -145,12 +145,13 @@ function cludo_search_block_view($delta = '') {
             <div>Search results blockview</div>
             <div id="cludo-search-results">
               <div class="cludo-r">
-                  <div class="cludo-c-12">
-                      <div class="search-result-count"></div>
-                      <div class="search-did-you-mean"></div> 
-                      <div class="search-results"></div>
-                  </div>           
-              </div>        
+                <div class="cludo-c-12">
+                  <div class="search-result-count"></div>
+                  <div class="search-did-you-mean"></div>
+                  <div class="search-results"></div>
+                </div>
+              </div>
+            </div>
           </div>
         ';
 
@@ -388,9 +389,10 @@ function cludo_search_preprocess_page(&$variables) {
 
   // Insert at bottom of footer.
   $footer_search_js = "
-  var CludoSearch;
-  (function () {
-      var cludoSettings = {
+    var CludoSearch;
+    (function () {
+      jQuery(document).ready( function() {
+        var cludoSettings = {
           customerId: " . $settings['customerId'] . ",
           engineId: " . $settings['engineId'] . ",
           searchUrl: '" . $settings['searchUrl'] . "',
@@ -400,13 +402,14 @@ function cludo_search_preprocess_page(&$variables) {
           hideSearchFilters: " . $hide_search_filters . ",
           language: 'en',
           searchInputs: [\"cludo-search-block-form \",\"cludo-search-search-form\"],
-          type: 'inline',		
-  hideSearchFilters: true,		
-  searchApiUrl: 'https://api-us1.cludo.com/api/v3'
-      };
-  CludoSearch= new Cludo(cludoSettings);
-  CludoSearch.init();
-  })();
+          type: 'inline',
+          hideSearchFilters: true,
+          searchApiUrl: 'https://api-us1.cludo.com/api/v3'
+        };
+        CludoSearch= new Cludo(cludoSettings);
+        CludoSearch.init();
+      });
+    })();
   ";
 
   drupal_add_js('//customer.cludo.com/scripts/bundles/search-script.min.js', array(
