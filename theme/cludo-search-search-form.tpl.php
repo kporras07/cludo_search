@@ -4,7 +4,8 @@
  * @file
  * Default theme implementation for the full search form.
  *
- * Variables of interest
+ * Available variables:
+ *
  * - variables['form'] : the form elements array, pre-render
  * - variables['search_form']['hidden'] : hidden form elements collapsed + rendered
  * - variables['search_form'] : non-hidden form elements rendered and keyed by original form keys
@@ -15,15 +16,15 @@
 ?>
 <?php print drupal_render($search_form); ?>
 <?php print drupal_render($cludo_search_search_form); ?>
-<div class="container-inline">
-    <?php print $search_form_complete; ?>
-</div>            
+<div class="cludo-search-form">
+  <?php print $search_form_complete; ?>
+</div>
 <div id="cludo-search-results">
-    <div class="cludo-r">
-        <div class="cludo-c-12">
-            <div class="search-result-count"></div>
-            <div class="search-did-you-mean"></div> 
-            <div class="search-results"></div>
-        </div>           
-    </div>        
+  <div class="cludo-r">
+    <div class="cludo-c-12">
+      <div class="search-result-count"></div>
+      <div class="search-did-you-mean"></div>
+      <div class="search-results"></div>
+    </div>
+  </div>
 </div>

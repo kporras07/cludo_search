@@ -1,4 +1,9 @@
-/* full search form */
+/**
+ * @file
+ *   CSS for the Cludo Search module.
+ */
+
+/* Full search form */
 .cludo-search-search-form {
   margin-bottom: 1em;
 }
@@ -11,7 +16,7 @@
   list-style: none;
 }
 
-/* result entries */
+/* Result entries */
 .search-gooogle-appliance-results p {
   margin-top: 0;
 }
@@ -34,7 +39,7 @@
   color: #888;
 }
 
-/* key match results */
+/* Key match results */
 .cludo-search-keymatch-results {
   padding-left: 0;
 }
@@ -54,13 +59,13 @@
   margin: 0;
 }
 
-/* synonyms */
-/* allow synonyms on search results page to be snug under the search box */
+/* Synonyms */
+/* Allow synonyms on search results page to be snug under the search box */
 form.search-cludo-search-search-form {
   margin-bottom: 2px;
 }
 
-/* add back the margin that formerly separated the search box from the "Search Results" heading */
+/* Add back the margin that formerly separated the search box from the "Search Results" heading */
 #search-results-heading {
   margin-top: 1em;
 }
@@ -71,7 +76,7 @@ form.search-cludo-search-search-form {
   list-style-type: none;
 }
 
-/* results listings "control" bar */
+/* Results listings "control" bar */
 .cludo-search-results-control-bar {
   border: 1px solid #ddd;
   background-color: #f6f6f2;
@@ -99,7 +104,4 @@ form.search-cludo-search-search-form {
 }
 .cludo-search-sorter .active-sort {
   font-weight: bold;
-}
-.cludo-search-level2 {
-  /*margin-left: 1.5em;*/
 }

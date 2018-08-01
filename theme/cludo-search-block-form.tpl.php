@@ -3,7 +3,9 @@
 /**
  * @file
  * Default theme implementation for the search block form.
- * variables of interest
+ *
+ * Available variables:
+ *
  * - variables['form'] : the form elements array, pre-render
  * - variables['block_search_form']['hidden'] : hidden form elements collapsed + rendered
  * - variables['block_serach_form'] : form elements rendered and keyed by original form keys
@@ -12,9 +14,9 @@
  * @see template_preprocess_cludo_search_block_form()
  */
 ?>
-<div class="container-inline">
+<div class="cludo-search-form">
   <?php if (empty($variables['form']['#block']->subject)) : ?>
     <h2 class="element-invisible"><?php print t('Search Cludo'); ?></h2>
   <?php endif; ?>
-  <?php print $block_search_form_complete; ?>  
+  <?php print $block_search_form_complete; ?>
 </div>

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * Theme registry and preprocess functions for the default templates.
@@ -79,8 +78,6 @@ function template_preprocess_cludo_search_block_form(&$vars) {
   // Collect the whole shebang so the complete form can be rendered with one
   // var.
   $vars['block_search_form_complete'] = implode($vars['block_search_form']);
-
-  // Render template.
 }
 
 /**
@@ -113,8 +110,6 @@ function template_preprocess_cludo_search_search_form(&$vars) {
   // Collect the whole shebang so the complete form can be rendered with one
   // var.
   $vars['search_form_complete'] = implode($vars['search_form']);
-
-  // Render template.
 }
 
 /**
