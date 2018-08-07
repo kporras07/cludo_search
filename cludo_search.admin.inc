@@ -26,15 +26,14 @@ function cludo_search_admin_settings($form) {
     '#collapsed' => FALSE,
   );
 
-  global $base_url;
-
   $form['connection_info']['searchUrl'] = array(
     '#type' => 'textfield',
     '#title' => t('Your Cludo Search page'),
-    '#description' => t('Valid URL or IP address of your search page, including <em>http://</em> or <em>https://. Example: <em>:base_url/:search_path</em>', array(':base_url' => $base_url, ':search_path' => $settings['search_page'])),
+    '#description' => t('This is the url where the site will search from.'),
     '#default_value' => $settings['searchUrl'],
-    '#required' => TRUE,
+    '#disabled' => TRUE,
   );
+  
   $form['connection_info']['customerId'] = array(
     '#type' => 'textfield',
     '#title' => t('Customer ID'),
@@ -42,6 +41,7 @@ function cludo_search_admin_settings($form) {
     '#default_value' => $settings['customerId'],
     '#required' => TRUE,
   );
+  
   $form['connection_info']['engineId'] = array(
     '#type' => 'textfield',
     '#title' => t('Engine ID'),
@@ -71,6 +71,7 @@ function cludo_search_admin_settings($form) {
     '#description' => t('This will disable autocomplete on the search form'),
     '#default_value' => $settings['disable_autocomplete'],
   );
+  
   $form['additional_customisations']['hide_results_count'] = array(
     '#type' => 'checkbox',
     '#title' => t('Hide Results Count'),
@@ -98,26 +99,16 @@ function cludo_search_admin_settings($form) {
 }
 
 /**
- * Implements hook_admin_settings_validate().
- */
-function cludo_search_admin_settings_validate($form, &$form_state) {
-
-  // SearchUrl should be a valid-format URL or IPv4 address including
-  // 'http(s)://'
-  if (!valid_url($form_state['values']['searchUrl'])) {
-    form_set_error(
-        'searchUrl', t('Cludo Search URL name must be a valid-format URL or IPv4 address, including <em>http(s)://</em>. Example: http://www.example.com/search.')
-    );
-  }
-}
-
-/**
  * Implements hook_admin_settings_submit().
  */
 function cludo_search_admin_settings_submit($form, &$form_state) {
 
   $field_keys = _cludo_search_get_field_keys();
-
+  
+  // Set full search url.
+  global $base_url;
+  $form_state['values']['searchUrl'] = $base_url . DIRECTORY_SEPARATOR . $form_state['values']['search_page'];
+  
   // Save settings.
   foreach ($field_keys as $field) {
     variable_set('cludo_search_' . $field, trim($form_state['values'][$field]));
