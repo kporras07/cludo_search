@@ -10,7 +10,6 @@
 /**
  * Default module settings.
  */
-define('CS_DEFAULT_SEARCHURL', '');
 define('CS_DEFAULT_CUSTOMERID', 'default_customerId');
 define('CS_DEFAULT_ENGINEID', 'default_engineId');
 define('CS_DEFAULT_SEARCH_PAGE', 'csearch');

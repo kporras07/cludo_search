@@ -26,14 +26,6 @@ function cludo_search_admin_settings($form) {
     '#collapsed' => FALSE,
   );
 
-  $form['connection_info']['searchUrl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Your Cludo Search page'),
-    '#description' => t('This is the url where the site will search from.'),
-    '#default_value' => $settings['searchUrl'],
-    '#disabled' => TRUE,
-  );
-  
   $form['connection_info']['customerId'] = array(
     '#type' => 'textfield',
     '#title' => t('Customer ID'),
@@ -104,10 +96,6 @@ function cludo_search_admin_settings($form) {
 function cludo_search_admin_settings_submit($form, &$form_state) {
 
   $field_keys = _cludo_search_get_field_keys();
-  
-  // Set full search url.
-  global $base_url;
-  $form_state['values']['searchUrl'] = $base_url . DIRECTORY_SEPARATOR . $form_state['values']['search_page'];
   
   // Save settings.
   foreach ($field_keys as $field) {
