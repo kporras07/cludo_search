@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Theme registry and preprocess functions for the default templates.

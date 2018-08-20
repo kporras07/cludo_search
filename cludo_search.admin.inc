@@ -33,7 +33,7 @@ function cludo_search_admin_settings($form) {
     '#default_value' => $settings['customerId'],
     '#required' => TRUE,
   );
-  
+
   $form['connection_info']['engineId'] = array(
     '#type' => 'textfield',
     '#title' => t('Engine ID'),
@@ -63,7 +63,7 @@ function cludo_search_admin_settings($form) {
     '#description' => t('This will disable autocomplete on the search form'),
     '#default_value' => $settings['disable_autocomplete'],
   );
-  
+
   $form['additional_customisations']['hide_results_count'] = array(
     '#type' => 'checkbox',
     '#title' => t('Hide Results Count'),
@@ -96,7 +96,7 @@ function cludo_search_admin_settings($form) {
 function cludo_search_admin_settings_submit($form, &$form_state) {
 
   $field_keys = _cludo_search_get_field_keys();
-  
+
   // Save settings.
   foreach ($field_keys as $field) {
     variable_set('cludo_search_' . $field, trim($form_state['values'][$field]));
