@@ -26,7 +26,9 @@ function cludo_search_profile_features_export_options() {
 function cludo_search_profile_features_export($data, &$export, $module_name = '') {
   $keys = _cludo_search_get_field_keys();
   foreach ($keys as $key) {
-    $export['features']['cludo_search_profile']['cludo_search_' . $key] = variable_get('cludo_search_' . $key);
+    if(isset($data['cludo_search_' . $key])){
+      $export['features']['cludo_search_profile']['cludo_search_' . $key] = variable_get('cludo_search_' . $key);
+    }
   }
 }
 
@@ -35,19 +37,18 @@ function cludo_search_profile_features_export($data, &$export, $module_name = ''
  */
 function cludo_search_profile_features_export_render($module_name, $data, $export = NULL) {
   $code = array();
-  $code[] = '$cludo_search_profile = array();';
+  $code[] = '  $cludo_search_profile = array();';
 
   foreach ($data as $key => $name) {
     if ($export) {
-      $code[] = "\$cludo_search_profile['{$key}'] = " . features_var_export($name) . ";";
+      $code[] = "  \$cludo_search_profile['{$key}'] = " . features_var_export($name) . ";";
     }
     else {
       $val = variable_get($name);
-      $code[] = "\$cludo_search_profile['{$name}'] = " . features_var_export($val) . ";";
+      $code[] = "  \$cludo_search_profile['{$name}'] = " . features_var_export($val) . ";";
     }
   }
-
-  $code[] = "return \$cludo_search_profile;";
+  $code[] = "  return \$cludo_search_profile;";
   $code = implode("\n", $code);
   return array('cludo_search_defaults' => $code);
 }
@@ -55,7 +56,14 @@ function cludo_search_profile_features_export_render($module_name, $data, $expor
 /**
  * Implements hook_features_revert().
  */
-function cludo_search_profile_features_revert($module_name) {
+function cludo_search_profile_features_revert($module) {
+  return cludo_search_profile_features_rebuild($module);
+}
+
+/**
+ * Implements hook_features_rebuild().
+ */
+function cludo_search_profile_features_rebuild($module_name) {
   $mycomponents = module_invoke($module_name, 'cludo_search_defaults');
   if (!empty($mycomponents)) {
     foreach ($mycomponents as $name => $value) {
