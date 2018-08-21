@@ -362,6 +362,16 @@ function cludo_search_search_view($query = '', $sort = NULL) {
 }
 
 /**
+ * Implements theme_preprocess_block().
+ */
+function cludo_search_preprocess_block(&$variables) {
+  if (in_array($variables['block']->delta, array('ca_block_search_form', 'ca_result_searches'))) {
+    $settings = _cludo_search_get_settings();
+    cludo_search_insert_js_css($settings);
+  }
+}
+
+/**
  * Adding javascript to header and footer.
  *
  * @see https://cludo.zendesk.com/hc/en-us/articles/115003954911-How-to-use-and-customize-in-line-templates
@@ -369,28 +379,41 @@ function cludo_search_search_view($query = '', $sort = NULL) {
  */
 function cludo_search_preprocess_page(&$variables) {
   $settings = _cludo_search_get_settings();
+  if (current_path() == $settings['search_page']) {
+    cludo_search_insert_js_css($settings);
+  }
+}
 
-  // Insert at end of head".
-  $head_search_css = '<link href="//customer.cludo.com/css/templates/v1.1/essentials/cludo-search.min.css" type="text/css" rel="stylesheet">';
-  $head_search_css .= '<!--[if lte IE 9]>';
-  $head_search_css .= '<script src="//api.cludo.com/scripts/xdomain.js" slave="//api.cludo.com/proxy.html" type="text/javascript">';
-  $head_search_css .= '</script><![endif]-->';
+/**
+ * Adds Cludo code required for display.
+ *
+ * @global string $base_url
+ * @param array $settings
+ */
+function cludo_search_insert_js_css(array $settings) {
+  $added = &drupal_static(__FUNCTION__);
+  if (empty($added)) {
+    // Insert at end of head".
+    $head_search_css = '<link href="//customer.cludo.com/css/templates/v1.1/essentials/cludo-search.min.css" type="text/css" rel="stylesheet">';
+    $head_search_css .= '<!--[if lte IE 9]>';
+    $head_search_css .= '<script src="//api.cludo.com/scripts/xdomain.js" slave="//api.cludo.com/proxy.html" type="text/javascript">';
+    $head_search_css .= '</script><![endif]-->';
 
-  $markup_array = array(
-    '#type' => 'markup',
-    '#markup' => $head_search_css,
-  );
+    $markup_array = array(
+      '#type' => 'markup',
+      '#markup' => $head_search_css,
+    );
 
-  drupal_add_html_head($markup_array, 'cludo_search');
-  $disable_autocomplete = $settings['disable_autocomplete'] ? 'true' : 'false';
-  $hide_results = $settings['hide_results_count'] ? 'true' : 'false';
-  $hide_did_you_mean = $settings['hide_did_you_mean'] ? 'true' : 'false';
-  $hide_search_filters = $settings['hide_search_filters'] ? 'true' : 'false';
-  global $base_url;
-  $search_url = $base_url . DIRECTORY_SEPARATOR . $settings['search_page'];
+    drupal_add_html_head($markup_array, 'cludo_search');
+    $disable_autocomplete = $settings['disable_autocomplete'] ? 'true' : 'false';
+    $hide_results = $settings['hide_results_count'] ? 'true' : 'false';
+    $hide_did_you_mean = $settings['hide_did_you_mean'] ? 'true' : 'false';
+    $hide_search_filters = $settings['hide_search_filters'] ? 'true' : 'false';
+    global $base_url;
+    $search_url = $base_url . DIRECTORY_SEPARATOR . $settings['search_page'];
 
-  // Insert at bottom of footer.
-  $footer_search_js = "
+    // Insert at bottom of footer.
+    $footer_search_js = "
     var CludoSearch;
     (function () {
       jQuery(document).ready( function() {
@@ -414,20 +437,22 @@ function cludo_search_preprocess_page(&$variables) {
     })();
   ";
 
-  drupal_add_js('//customer.cludo.com/scripts/bundles/search-script.min.js', array(
-    'type' => 'external',
-    'scope' => 'header',
-    'group' => JS_THEME,
-    'every_page' => TRUE,
-    'weight' => -1,
-  ));
+    drupal_add_js('//customer.cludo.com/scripts/bundles/search-script.min.js', array(
+      'type' => 'external',
+      'scope' => 'header',
+      'group' => JS_THEME,
+      'every_page' => TRUE,
+      'weight' => -1,
+    ));
 
-  drupal_add_js($footer_search_js, array(
-    'type' => 'inline',
-    'scope' => 'footer',
-    'every_page' => TRUE,
-    'weight' => 5,
-  ));
+    drupal_add_js($footer_search_js, array(
+      'type' => 'inline',
+      'scope' => 'footer',
+      'every_page' => TRUE,
+      'weight' => 5,
+    ));
+    $added = TRUE;
+  }
 }
 
 /**
