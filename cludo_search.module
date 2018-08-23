@@ -1,4 +1,4 @@
-<?php
+z<?php
 
 /**
  * @file
@@ -196,22 +196,21 @@ function cludo_search_block_form($form, &$form_state) {
  * Just sets the redirect for the form based on the search query.
  */
 function cludo_search_block_form_submit($form, &$form_state) {
-
   // Kill any dynamic destinations, as the results page is always the
   // destination.
   if (isset($_GET['destination'])) {
     unset($_GET['destination']);
   }
 
-  // Set the redirect.
-  $search_query = urlencode($form_state['values']['search_keys']);
-
-  // Dirty change to get rid of +.
-  $search_query = str_replace('+', '%20', $search_query);
+  // Set the redirect, decode to remove + and %20 encode to add back %20.
+  $search_query = rawurlencode(urldecode($form_state['values']['search_keys']));
 
   $settings = _cludo_search_get_settings();
-
-  $form_state['redirect'] = array($settings['search_page'], array('fragment' => '?cludoquery=' . $search_query));
+  
+  // Grab any query params and pass back into redirect.
+  $query = drupal_get_query_parameters();
+  
+  $form_state['redirect'] = array($settings['search_page'], array('query'=>$query,'fragment' => '?cludoquery=' . $search_query));
 
   // Search execution happens in page callback.
   $form['#action'] = '';
@@ -416,21 +415,21 @@ function cludo_search_insert_js_css(array $settings) {
     $footer_search_js = "
     var CludoSearch;
     jQuery(function() {
-        var cludoSettings = {
-          customerId: " . $settings['customerId'] . ",
-          engineId: " . $settings['engineId'] . ",
-          searchUrl: '" . $search_url . "',
-          disableAutocomplete: " . $disable_autocomplete . ",
-          hideResultsCount: " . $hide_results . ",
-          hideSearchDidYouMean: " . $hide_did_you_mean . ",
-          hideSearchFilters: " . $hide_search_filters . ",
-          language: 'en',
-          searchInputs: [\"cludo-search-block-form \",\"cludo-search-search-form\"],
-          type: 'inline',
-          hideSearchFilters: true
-        };
-        CludoSearch= new Cludo(cludoSettings);
-        CludoSearch.init();
+      var cludoSettings = {
+        customerId: " . $settings['customerId'] . ",
+        engineId: " . $settings['engineId'] . ",
+        searchUrl: '" . $search_url . "',
+        disableAutocomplete: " . $disable_autocomplete . ",
+        hideResultsCount: " . $hide_results . ",
+        hideSearchDidYouMean: " . $hide_did_you_mean . ",
+        hideSearchFilters: " . $hide_search_filters . ",
+        language: 'en',
+        searchInputs: [\"cludo-search-block-form \",\"cludo-search-search-form\"],
+        type: 'inline',
+        hideSearchFilters: true
+      };
+    CludoSearch = new Cludo(cludoSettings);
+    CludoSearch.init();
     });
   ";
 
