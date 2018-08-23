@@ -26,7 +26,7 @@ function cludo_search_profile_features_export_options() {
 function cludo_search_profile_features_export($data, &$export, $module_name = '') {
   $keys = _cludo_search_get_field_keys();
   foreach ($keys as $key) {
-    if(isset($data['cludo_search_' . $key])){
+    if (isset($data['cludo_search_' . $key])) {
       $export['features']['cludo_search_profile']['cludo_search_' . $key] = variable_get('cludo_search_' . $key);
     }
   }
