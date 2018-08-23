@@ -1,5 +1,4 @@
 z<?php
-
 /**
  * @file
  * Cludo search module enables searching via a dedicated cludo Search search.
@@ -202,15 +201,23 @@ function cludo_search_block_form_submit($form, &$form_state) {
     unset($_GET['destination']);
   }
 
-  // Set the redirect, decode to remove + and %20 encode to add back %20.
-  $search_query = rawurlencode(urldecode($form_state['values']['search_keys']));
+  // Set the redirect, decode to remove + and %20.
+  $search_query = urldecode($form_state['values']['search_keys']);
 
   $settings = _cludo_search_get_settings();
-  
+
   // Grab any query params and pass back into redirect.
   $query = drupal_get_query_parameters();
-  
-  $form_state['redirect'] = array($settings['search_page'], array('query'=>$query,'fragment' => '?cludoquery=' . $search_query));
+
+  // Set cludo fragment.
+  $cludo_fragment = drupal_http_build_query(array('cludoquery' => $search_query));
+
+  $form_state['redirect'] = array(
+    $settings['search_page'], array(
+      'query' => $query,
+      'fragment' => '?' . $cludo_fragment,
+    ),
+  );
 
   // Search execution happens in page callback.
   $form['#action'] = '';
@@ -386,8 +393,9 @@ function cludo_search_preprocess_page(&$variables) {
 /**
  * Adds Cludo code required for display.
  *
- * @global string $base_url
  * @param array $settings
+ *
+ * @global string $base_url
  */
 function cludo_search_insert_js_css(array $settings) {
   $added = &drupal_static(__FUNCTION__);
