@@ -15,8 +15,5 @@
  */
 ?>
 <div class="cludo-search-form">
-  <?php if (empty($variables['form']['#block']->subject)) : ?>
-    <h2 class="element-invisible"><?php print t('Search Cludo'); ?></h2>
-  <?php endif; ?>
   <?php print $block_search_form_complete; ?>
 </div>
