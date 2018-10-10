@@ -14,6 +14,6 @@
  * @see template_preprocess_cludo_search_block_form()
  */
 ?>
-<div class="cludo-search-form">
+<div class="cludo-search-form" role="search">
   <?php print $block_search_form_complete; ?>
 </div>
