@@ -22,16 +22,6 @@ class SettingsForm extends ConfigFormBase {
   protected $configFactory;
 
   /**
-   * Constructs a \Drupal\aggregator\SettingsForm object.
-   *
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   *   The factory for configuration objects.
-   */
-  public function __construct(ConfigFactoryInterface $config_factory) {
-    parent::__construct($config_factory);
-  }
-
-  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
