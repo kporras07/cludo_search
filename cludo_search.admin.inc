@@ -85,6 +85,13 @@ function cludo_search_admin_settings($form) {
     '#default_value' => $settings['hide_search_filters'],
   );
 
+  $form['additional_customisations']['bypass_cludo_cdn'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Bypass Cludo\'s CDN'),
+    '#description' => t('By default, customer.cludo.com is used as the source for search-script.min.js and cludo-search.min.css. When selected, static.cludo.com is used instead to bypass Cludo\'s CDN'),
+    '#default_value' => $settings['bypass_cludo_cdn'],
+  );
+
   $form['#submit'][] = 'cludo_search_admin_settings_submit';
 
   return system_settings_form($form);

@@ -406,9 +406,11 @@ function cludo_search_preprocess_page(&$variables) {
  */
 function cludo_search_insert_js_css(array $settings) {
   $added = &drupal_static(__FUNCTION__);
+  $hosting_type = $settings['bypass_cludo_cdn'] ? 'static' : 'customer';
+
+  // Insert at end of head.
   if (empty($added)) {
-    // Insert at end of head".
-    $head_search_css = '<link href="//customer.cludo.com/css/templates/v1.1/essentials/cludo-search.min.css" type="text/css" rel="stylesheet">';
+    $head_search_css = '<link href="//' . $hosting_type . '.cludo.com/css/templates/v1.1/essentials/cludo-search.min.css" type="text/css" rel="stylesheet">';
     $head_search_css .= '<!--[if lte IE 9]>';
     $head_search_css .= '<script src="//api.cludo.com/scripts/xdomain.js" slave="//api.cludo.com/proxy.html" type="text/javascript">';
     $head_search_css .= '</script><![endif]-->';
@@ -448,7 +450,7 @@ function cludo_search_insert_js_css(array $settings) {
     });
   ";
 
-    drupal_add_js('//customer.cludo.com/scripts/bundles/search-script.min.js', array(
+    drupal_add_js('//' . $hosting_type . '.cludo.com/scripts/bundles/search-script.min.js', array(
       'type' => 'external',
       'scope' => 'header',
       'group' => JS_THEME,
@@ -481,5 +483,6 @@ function _cludo_search_get_field_keys() {
     'hide_results_count',
     'hide_did_you_mean',
     'hide_search_filters',
+    'bypass_cludo_cdn',
   );
 }
