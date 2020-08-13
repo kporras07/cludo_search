@@ -1,0 +1,10 @@
+{
+    "name": "drupal/cludo_search",
+    "type": "drupal-module",
+    "description": "Cludo search module for Drupal.",
+    "homepage": "http://drupal.org/project/cludo_search",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "drupal/core": "^8.8 || ^9"
+    }
+}
